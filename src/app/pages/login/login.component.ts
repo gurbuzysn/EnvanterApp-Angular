@@ -3,6 +3,7 @@ import { FormsModule } from "@angular/forms";
 import { InputTextModule } from "primeng/inputtext";
 import { ButtonModule } from "primeng/button";
 import { AuthService } from "../../services/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent{
     userName : string = "";
     password : string = "";
 
-    constructor(private authService: AuthService){}
+    constructor(private authService: AuthService, private router: Router){}
 
     login(){
         const data ={
@@ -24,12 +25,19 @@ export class LoginComponent{
         }
 
         this.authService.login(data).subscribe({
-            next: (res) => {
-                alert('Giriş başarılı: ' + res);
+            next: (res : any) => {
+
+                localStorage.setItem('token', res.token);
+
+                this.router.navigate(['/dashboard']);
+
+                alert('Giriş başarılı');
+
+                
             },
             error: (err) => {
-                alert('Giriş hatası: ' + err);
-            }
+                    alert('Giriş hatası: ' + err);
+                }
         })
     }
 }
