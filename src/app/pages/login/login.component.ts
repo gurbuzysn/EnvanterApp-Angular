@@ -18,14 +18,10 @@ export class LoginComponent{
     constructor(private authService: AuthService){}
 
     login(){
-        alert("Kullanıcı Adı : " + this.userName +  "\nŞifre : " + this.password);
-        alert("Component den servise veri gönderiliyor...");
-
         const data ={
             userName: this.userName,
             password: this.password
         }
-
 
         this.authService.login(data).subscribe({
             next: (res) => {
