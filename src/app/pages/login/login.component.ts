@@ -30,9 +30,6 @@ export class LoginComponent{
                 localStorage.setItem('token', res.token);
 
                 this.router.navigate(['/dashboard']);
-
-                alert('Giriş başarılı');
-
                 
             },
             error: (err) => {
