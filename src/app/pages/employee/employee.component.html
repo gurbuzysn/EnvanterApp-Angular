@@ -25,18 +25,18 @@
     <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
       <thead>
         <tr class="">
-          <th class="text-left px-4 py-2 border-b">İsim Soyisim</th>
-          <th class="text-left px-4 py-2 border-b">Email</th>
-          <th class="text-left px-4 py-2 border-b">Telefon</th>
-          <th class="text-left px-4 py-2 border-b">Departman</th>
+          <th class="text-left px-4 py-2 border-b border-gray-200">İsim Soyisim</th>
+          <th class="text-left px-4 py-2 border-b border-gray-200">Email</th>
+          <th class="text-left px-4 py-2 border-b border-gray-200">Telefon</th>
+          <th class="text-left px-4 py-2 border-b border-gray-200">Departman</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let employee of filteredEmployees()" class="hover:bg-blue-50 transition">
-          <td class="px-4 py-6 border-b">{{ employee.name }}</td>
-          <td class="px-4 py-6 border-b">{{ employee.email }}</td>
-          <td class="px-4 py-6 border-b">{{ employee.phone }}</td>
-          <td class="px-4 py-6 border-b">{{ employee.department }}</td>
+          <td class="px-4 py-6 border-b border-gray-200">{{ employee.name }}</td>
+          <td class="px-4 py-6 border-b border-gray-200">{{ employee.email }}</td>
+          <td class="px-4 py-6 border-b border-gray-200">{{ employee.phone }}</td>
+          <td class="px-4 py-6 border-b border-gray-200">{{ employee.department }}</td>
         </tr>
         <tr *ngIf="filteredEmployees().length === 0">
           <td colspan="4" class="text-center py-4 text-gray-400">
