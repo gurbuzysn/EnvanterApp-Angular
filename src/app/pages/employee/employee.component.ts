@@ -3,6 +3,7 @@ import { InputTextModule } from "primeng/inputtext";
 import { IconFieldModule } from "primeng/iconfield";
 import { InputIconModule } from "primeng/inputicon";
 import { CommonModule } from "@angular/common";
+import { Employee, EmployeeService } from "../../services/employee.service";
 
 
 @Component({
@@ -15,13 +16,16 @@ import { CommonModule } from "@angular/common";
 
 export class EmployeeComponent{
 searchText: string = '';
+employees: Employee[] = [];
 
+constructor(private employeeService : EmployeeService){}
 
-     employees = [
-    { name: 'Yasin Gürbüz', email: 'yasin@example.com', phone: '0500 111 22 33', department: 'IT' },
-    { name: 'Ayşe Demir', email: 'ayse@example.com', phone: '0500 444 55 66', department: 'Muhasebe' },
-    { name: 'Ali Kaya', email: 'ali@example.com', phone: '0500 999 88 77', department: 'İnsan Kaynakları' },
-  ];
+  ngOnInit(): void {
+    this.employeeService.getAllEmployees().subscribe({
+      next: (data) => this.employees = data,
+      error: (err) => console.error('Hata:', err)
+    })
+  }
 
      filteredEmployees() {
     if (!this.searchText) return this.employees;
