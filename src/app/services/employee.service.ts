@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 export interface Employee{
-    name: string,
+    firstName: string,
     lastName: string,
     email: string,
     phoneNumber: string,
@@ -20,7 +20,6 @@ export class EmployeeService{
     constructor(private http: HttpClient){}
 
     getAllEmployees() : Observable<Employee[]>{
-        alert('getAllEmployees metodu çalıştı. Apiye istemeye gidiyor.')
         return this.http.get<Employee[]>(this.baseUrl)
     }
 }
