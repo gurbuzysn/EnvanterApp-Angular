@@ -4,19 +4,24 @@ import { IconFieldModule } from "primeng/iconfield";
 import { InputIconModule } from "primeng/inputicon";
 import { CommonModule } from "@angular/common";
 import { Employee, EmployeeService } from "../../services/employee.service";
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+
 
 @Component({
     selector: 'app-employee',
     standalone: true,
-    imports: [InputTextModule, IconFieldModule, InputIconModule, CommonModule],
+    imports: [InputTextModule, IconFieldModule, InputIconModule, CommonModule, DialogModule, ButtonModule],
     templateUrl: './employee.component.html'
 })
 
 export class EmployeeComponent{
 searchText: string = '';
 employees: Employee[] = [];
+visible: boolean = false;
 
-constructor(private employeeService : EmployeeService){}
+ constructor(private employeeService : EmployeeService){}
+  
 
   ngOnInit(): void {
     this.employeeService.getAllEmployees().subscribe({
@@ -33,4 +38,14 @@ constructor(private employeeService : EmployeeService){}
       e.firstName.toLowerCase().includes(this.searchText.toLowerCase())
     );
   }
+
+
+showDialog() {
+  this.visible = true;
+}
+
+
+
+
+
 }
