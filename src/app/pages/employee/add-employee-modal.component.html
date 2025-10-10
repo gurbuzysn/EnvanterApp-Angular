@@ -1,0 +1,29 @@
+<p-dialog
+  header="Çalışan Ekle"
+  [modal]="true"
+  [(visible)]="visible"
+  (onHide)="onHide()"
+  [style]="{ width: '50rem' }"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [maximizable]="true"
+>
+  <div>
+
+
+    <div class="flex d-flex justify-around mb-5">
+        <input type="text" pInputText placeholder="İsim" />
+        <input type="text" pInputText placeholder="Soyisim" />
+    </div>
+
+    <div class="flex d-flex justify-around mb-5">
+        <input type="text" pInputText placeholder="E-Mail" />
+        <input type="text" pInputText placeholder="Telefon" />
+    </div>
+
+    <div class="flex d-flex justify-around">
+        <input type="text" pInputText placeholder="Departman" />
+        <input type="text" pInputText placeholder="Ünvan" />
+    </div>
+
+  </div>
+</p-dialog>
