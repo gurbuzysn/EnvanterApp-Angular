@@ -1,0 +1,74 @@
+<p-dialog
+  header="Çalışan Ekle"
+  [modal]="true"
+  [(visible)]="visible"
+  (onHide)="onHide()"
+  [style]="{ width: '50rem' }"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [maximizable]="true"
+>
+  <div>
+    <div class="flex items-center gap-5">
+      <div class="relative w-20 h-20">
+        <img
+          *ngIf="previewUrl; else defaultAvatar"
+          [src]="previewUrl"
+          alt="Employee Avatar"
+          class="w-20 h-20 rounded-full object-cover border border-gray-300 shadow-sm"
+        />
+
+        <ng-template #defaultAvatar>
+          <div
+            class="w-20 h-20 flex items-center justify-center rounded-full bg-gray-100 border border-gray-300 shadow-sm"
+          >
+            <i class="pi pi-user text-gray-500 text-3xl"></i>
+          </div>
+        </ng-template>
+      </div>
+
+      <p-fileUpload
+        mode="basic"
+        name="avatar"
+        chooseLabel="Dosya Seç"
+        (onSelect)="onFileSelected($event)"
+        auto="false"
+        class="p-button-rounded p-button-info"
+      ></p-fileUpload>
+    </div>
+
+    <div class="flex d-flex justify-around mb-5">
+      <input type="text" pInputText placeholder="İsim" />
+      <input type="text" pInputText placeholder="Soyisim" />
+    </div>
+
+    <div class="flex d-flex justify-around mb-5">
+      <input type="text" pInputText placeholder="E-Mail" />
+      <input type="text" pInputText placeholder="Telefon" />
+    </div>
+
+    <div class="flex d-flex justify-around">
+      <input type="text" pInputText placeholder="Departman" />
+      <input type="text" pInputText placeholder="Ünvan" />
+    </div>
+
+    <div class="flex justify-center gap-5 mt-5">
+      <button
+        pButton
+        type="button"
+        label="İptal"
+        icon="pi pi-times"
+        iconPos="right"
+        class="mt-5 p-button-danger"
+        (click)="onHide()"
+      ></button>
+      <button
+        pButton
+        type="button"
+        label="Kaydet"
+        icon="pi pi-check"
+        iconPos="right"
+        class="mt-5"
+      ></button>
+    </div>
+  </div>
+</p-dialog>

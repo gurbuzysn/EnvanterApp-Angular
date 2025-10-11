@@ -6,7 +6,7 @@ import { CommonModule } from "@angular/common";
 import { Employee, EmployeeService } from "../../services/employee.service";
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
-import { AddEmployeeModalComponent } from "./add-employee-modal.component";
+import { AddEmployeeModalComponent } from "./add-employee/add-employee-modal.component";
 
 
 @Component({
