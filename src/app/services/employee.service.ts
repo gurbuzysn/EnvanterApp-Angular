@@ -4,11 +4,12 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 export interface Employee{
-    firstName: string,
-    lastName: string,
-    email: string,
-    phoneNumber: string,
-    department: string,
+    FirstName: string,
+    LastName: string,
+    Email: string,
+    PhoneNumber: string,
+    Department: string,
+    Position: string
 }
 
 @Injectable({
@@ -22,4 +23,11 @@ export class EmployeeService{
     getAllEmployees() : Observable<Employee[]>{
         return this.http.get<Employee[]>(this.baseUrl)
     }
+
+
+    addEmployee(employee: Employee): Observable<Employee>{
+        alert("EmployeeService içindeki addEmployee metodu çalıştı");
+        return this.http.post<Employee>(this.baseUrl, employee)
+    }
+
 }

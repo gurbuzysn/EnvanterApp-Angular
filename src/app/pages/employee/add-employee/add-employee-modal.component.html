@@ -7,14 +7,16 @@
   [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
   [maximizable]="true"
 >
-  <div>
-    <div class="flex items-center gap-5">
-      <div class="relative w-20 h-20">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="flex d-flex justify-around mb-5">
+
+
+      <div class="relative w-15 h-15">
         <img
           *ngIf="previewUrl; else defaultAvatar"
           [src]="previewUrl"
           alt="Employee Avatar"
-          class="w-20 h-20 rounded-full object-cover border border-gray-300 shadow-sm"
+          class="w-15 h-15 rounded-full object-cover border border-gray-300 shadow-sm"
         />
 
         <ng-template #defaultAvatar>
@@ -26,29 +28,31 @@
         </ng-template>
       </div>
 
+
       <p-fileUpload
         mode="basic"
         name="avatar"
-        chooseLabel="Dosya Seç"
+        chooseLabel="Fotoğraf Seç"
         (onSelect)="onFileSelected($event)"
         auto="false"
         class="p-button-rounded p-button-info"
       ></p-fileUpload>
+
     </div>
 
     <div class="flex d-flex justify-around mb-5">
-      <input type="text" pInputText placeholder="İsim" />
-      <input type="text" pInputText placeholder="Soyisim" />
+      <input type="text" pInputText formControlName="FirstName" placeholder="İsim" />
+      <input type="text" pInputText formControlName="LastName" placeholder="Soyisim" />
     </div>
 
     <div class="flex d-flex justify-around mb-5">
-      <input type="text" pInputText placeholder="E-Mail" />
-      <input type="text" pInputText placeholder="Telefon" />
+      <input type="text" pInputText formControlName="Email" placeholder="E-Mail" />
+      <input type="text" pInputText formControlName="PhoneNumber" placeholder="Telefon" />
     </div>
 
     <div class="flex d-flex justify-around">
-      <input type="text" pInputText placeholder="Departman" />
-      <input type="text" pInputText placeholder="Ünvan" />
+      <input type="text" pInputText formControlName="Department" placeholder="Departman" />
+      <input type="text" pInputText formControlName="Position" placeholder="Ünvan" />
     </div>
 
     <div class="flex justify-center gap-5 mt-5">
@@ -63,12 +67,12 @@
       ></button>
       <button
         pButton
-        type="button"
+        type="submit"
         label="Kaydet"
         icon="pi pi-check"
         iconPos="right"
-        class="mt-5"
+        class=" p-button-success mt-5"
       ></button>
     </div>
-  </div>
+  </form>
 </p-dialog>

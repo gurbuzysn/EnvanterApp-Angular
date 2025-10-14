@@ -36,10 +36,10 @@
       </thead>
       <tbody>
         <tr *ngFor="let employee of filteredEmployees()" class="hover:bg-blue-50 transition">
-          <td class="px-4 py-6 border-b border-gray-200">{{ employee.firstName }}</td>
-          <td class="px-4 py-6 border-b border-gray-200">{{ employee.email }}</td>
-          <td class="px-4 py-6 border-b border-gray-200">{{ employee.phoneNumber }}</td>
-          <td class="px-4 py-6 border-b border-gray-200">{{ employee.department }}</td>
+          <td class="px-4 py-6 border-b border-gray-200">{{ employee.FirstName }}</td>
+          <td class="px-4 py-6 border-b border-gray-200">{{ employee.Email }}</td>
+          <td class="px-4 py-6 border-b border-gray-200">{{ employee.PhoneNumber }}</td>
+          <td class="px-4 py-6 border-b border-gray-200">{{ employee.Department }}</td>
         </tr>
         <tr *ngIf="filteredEmployees().length === 0">
           <td colspan="4" class="text-center py-4 text-gray-400">Çalışan bulunamadı.</td>
