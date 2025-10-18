@@ -9,7 +9,8 @@ export interface Employee{
     Email: string,
     PhoneNumber: string,
     Department: string,
-    Position: string
+    Title: string,
+    ProfileImage?: File
 }
 
 @Injectable({
@@ -26,8 +27,20 @@ export class EmployeeService{
 
 
     addEmployee(employee: Employee): Observable<Employee>{
-        alert("EmployeeService içindeki addEmployee metodu çalıştı");
-        return this.http.post<Employee>(this.baseUrl, employee)
+
+
+        const formData = new FormData();
+        formData.append('FirstName', employee.FirstName);
+        formData.append('LastName', employee.LastName);
+        formData.append('Email', employee.Email);
+        formData.append('PhoneNumber', employee.PhoneNumber);
+        formData.append('Department', employee.Department);
+        formData.append('Title', employee.Title);
+        if (employee.ProfileImage) {
+            formData.append('ProfileImage', employee.ProfileImage);
+        }
+
+        return this.http.post<Employee>(this.baseUrl, formData)
     }
 
 }

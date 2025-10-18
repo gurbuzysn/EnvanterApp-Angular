@@ -28,18 +28,22 @@
     <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
       <thead>
         <tr class="">
-          <th class="text-left px-4 py-2 border-b border-gray-200">İsim Soyisim</th>
+          <th class="text-left px-4 py-2 border-b border-gray-200">İsim</th>
+          <th class="text-left px-4 py-2 border-b border-gray-200">Soyisim</th>
           <th class="text-left px-4 py-2 border-b border-gray-200">Email</th>
           <th class="text-left px-4 py-2 border-b border-gray-200">Telefon</th>
           <th class="text-left px-4 py-2 border-b border-gray-200">Departman</th>
+          <th class="text-left px-4 py-2 border-b border-gray-200">Ünvan</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let employee of filteredEmployees()" class="hover:bg-blue-50 transition">
           <td class="px-4 py-6 border-b border-gray-200">{{ employee.FirstName }}</td>
+          <td class="px-4 py-6 border-b border-gray-200">{{ employee.LastName }}</td>
           <td class="px-4 py-6 border-b border-gray-200">{{ employee.Email }}</td>
           <td class="px-4 py-6 border-b border-gray-200">{{ employee.PhoneNumber }}</td>
           <td class="px-4 py-6 border-b border-gray-200">{{ employee.Department }}</td>
+          <td class="px-4 py-6 border-b border-gray-200">{{ employee.Title }}</td>
         </tr>
         <tr *ngIf="filteredEmployees().length === 0">
           <td colspan="4" class="text-center py-4 text-gray-400">Çalışan bulunamadı.</td>

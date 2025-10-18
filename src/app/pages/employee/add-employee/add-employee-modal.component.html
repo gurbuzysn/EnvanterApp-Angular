@@ -9,8 +9,6 @@
 >
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="flex d-flex justify-around mb-5">
-
-
       <div class="relative w-15 h-15">
         <img
           *ngIf="previewUrl; else defaultAvatar"
@@ -28,16 +26,16 @@
         </ng-template>
       </div>
 
-
       <p-fileUpload
         mode="basic"
         name="avatar"
         chooseLabel="Fotoğraf Seç"
-        (onSelect)="onFileSelected($event)"
-        auto="false"
+        (onSelect)="onFileSelected($event.files[0])"
+        [auto]="false"
         class="p-button-rounded p-button-info"
-      ></p-fileUpload>
-
+        formControlName="ProfileImage"
+      >
+      </p-fileUpload>
     </div>
 
     <div class="flex d-flex justify-around mb-5">
@@ -52,7 +50,7 @@
 
     <div class="flex d-flex justify-around">
       <input type="text" pInputText formControlName="Department" placeholder="Departman" />
-      <input type="text" pInputText formControlName="Position" placeholder="Ünvan" />
+      <input type="text" pInputText formControlName="Title" placeholder="Ünvan" />
     </div>
 
     <div class="flex justify-center gap-5 mt-5">
@@ -71,7 +69,7 @@
         label="Kaydet"
         icon="pi pi-check"
         iconPos="right"
-        class=" p-button-success mt-5"
+        class="p-button-success mt-5"
       ></button>
     </div>
   </form>
