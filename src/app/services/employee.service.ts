@@ -10,7 +10,7 @@ export interface Employee{
     PhoneNumber: string,
     Department: string,
     Title: string,
-    ProfileImage?: File
+    ImageUri?: string
 }
 
 @Injectable({
@@ -36,8 +36,8 @@ export class EmployeeService{
         formData.append('PhoneNumber', employee.PhoneNumber);
         formData.append('Department', employee.Department);
         formData.append('Title', employee.Title);
-        if (employee.ProfileImage) {
-            formData.append('ProfileImage', employee.ProfileImage);
+        if (employee.ImageUri) {
+            formData.append('ImageUri', employee.ImageUri);
         }
 
         return this.http.post<Employee>(this.baseUrl, formData)

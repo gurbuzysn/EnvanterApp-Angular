@@ -8,35 +8,48 @@
   [maximizable]="true"
 >
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+
+
     <div class="flex d-flex justify-around mb-5">
-      <div class="relative w-15 h-15">
-        <img
-          *ngIf="previewUrl; else defaultAvatar"
-          [src]="previewUrl"
-          alt="Employee Avatar"
-          class="w-15 h-15 rounded-full object-cover border border-gray-300 shadow-sm"
-        />
 
-        <ng-template #defaultAvatar>
-          <div
-            class="w-20 h-20 flex items-center justify-center rounded-full bg-gray-100 border border-gray-300 shadow-sm"
-          >
-            <i class="pi pi-user text-gray-500 text-3xl"></i>
-          </div>
-        </ng-template>
-      </div>
 
-      <p-fileUpload
-        mode="basic"
-        name="avatar"
-        chooseLabel="Fotoğraf Seç"
-        (onSelect)="onFileSelected($event.files[0])"
-        [auto]="false"
-        class="p-button-rounded p-button-info"
-        formControlName="ProfileImage"
-      >
-      </p-fileUpload>
+        <div class="relative w-17 h-17 mb-3"> 
+          
+          <img
+                *ngIf="previewUrl; else defaultAvatar"
+                [src]="previewUrl"
+                alt="Employee Avatar"
+                class="w-full h-full rounded-full object-cover border border-gray-300 shadow-lg"
+            />
+
+            <ng-template #defaultAvatar>
+                <div
+                    class="w-full h-full flex items-center justify-center rounded-full bg-gray-100 border border-gray-300 shadow-lg"
+                >
+                    <i class="pi pi-user text-gray-500 text-4xl"></i>
+                </div>
+            </ng-template>
+
+        </div>
+
+            <p-fileUpload
+                mode="basic"
+                name="avatar"
+                chooseLabel="Fotoğraf Seç"
+                (onSelect)="onFileSelected($event.files[0])"
+                [auto]="false"
+                class="p-button-rounded p-button-info"
+                formControlName="ProfileImage"
+            >
+            </p-fileUpload>
+
     </div>
+
+
+
+
+
 
     <div class="flex d-flex justify-around mb-5">
       <input type="text" pInputText formControlName="FirstName" placeholder="İsim" />

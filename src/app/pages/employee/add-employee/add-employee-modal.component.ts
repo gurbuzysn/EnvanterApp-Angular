@@ -61,15 +61,12 @@ export class AddEmployeeModalComponent {
   }
 
   onFileSelected(file: File) {
-    alert('onFileSelected tetiklendi: ' + file.name);
-
     const reader = new FileReader();
     reader.onload = () => {
       this.previewUrl = reader.result;
       this.form.patchValue({ ProfileImage: file });
       this.form.get('ProfileImage')?.updateValueAndValidity();
     };
-
     reader.readAsDataURL(file);
   }
 }

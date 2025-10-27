@@ -28,6 +28,7 @@
     <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
       <thead>
         <tr class="">
+          <th class="text-left px-4 py-2 border-b border-gray-200"></th>
           <th class="text-left px-4 py-2 border-b border-gray-200">İsim</th>
           <th class="text-left px-4 py-2 border-b border-gray-200">Soyisim</th>
           <th class="text-left px-4 py-2 border-b border-gray-200">Email</th>
@@ -38,6 +39,16 @@
       </thead>
       <tbody>
         <tr *ngFor="let employee of filteredEmployees()" class="hover:bg-blue-50 transition">
+
+
+          <td class="px-4 py-6 border-b border-gray-200 flex items-center gap-3">
+            <img
+              [src]="employee.ImageUri"
+              alt="Profil Fotoğrafı"
+              class="w-10 h-10 rounded-full object-cover border border-gray-200"
+            />
+          </td>
+
           <td class="px-4 py-6 border-b border-gray-200">{{ employee.FirstName }}</td>
           <td class="px-4 py-6 border-b border-gray-200">{{ employee.LastName }}</td>
           <td class="px-4 py-6 border-b border-gray-200">{{ employee.Email }}</td>
