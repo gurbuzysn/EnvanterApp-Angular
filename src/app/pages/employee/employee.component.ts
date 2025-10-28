@@ -30,13 +30,8 @@ export class EmployeeComponent {
   constructor(private employeeService: EmployeeService) {}
 
   ngOnInit(): void {
-    this.employeeService.getAllEmployees().subscribe({
-      next: (data: any) => {
-        this.employees = data.Result;
-      },
-      error: (err) => console.error('Hata:', err),
-    });
-  }
+  this.loadEmployees();
+}
 
   filteredEmployees() {
     if (!this.searchText) return this.employees;
@@ -47,5 +42,24 @@ export class EmployeeComponent {
 
   showDialog() {
     this.visible = true;
+  }
+
+
+  loadEmployees() {
+  this.employeeService.getAllEmployees().subscribe({
+    next: (data: any) => {
+      this.employees = data.Result;
+    },
+    error: (err) => console.error('Hata:', err),
+  });
+}
+
+
+  removeEmployee(id: string) {
+    this.employeeService.removeEmployee(id).subscribe({
+      next: (data: any) => {
+        alert(data.Message);
+      },
+    });
   }
 }

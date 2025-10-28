@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 export interface Employee{
+    Id : string,
     FirstName: string,
     LastName: string,
     Email: string,
@@ -13,6 +14,16 @@ export interface Employee{
     ImageUri?: string
 }
 
+export interface GeneralResponse<T>{
+    IsSuccess: boolean;
+    Message: string;
+    Result: T;
+    HttpStatusCode: number;
+}
+
+
+
+
 @Injectable({
     providedIn: 'root'
 })
@@ -21,14 +32,9 @@ export class EmployeeService{
     baseUrl = `${environment.apiUrl}/Employee`
     constructor(private http: HttpClient){}
 
-    getAllEmployees() : Observable<Employee[]>{
-        return this.http.get<Employee[]>(this.baseUrl)
-    }
-
+    getAllEmployees() : Observable<Employee[]>{ return this.http.get<Employee[]>(this.baseUrl) }
 
     addEmployee(employee: Employee): Observable<Employee>{
-
-
         const formData = new FormData();
         formData.append('FirstName', employee.FirstName);
         formData.append('LastName', employee.LastName);
@@ -41,6 +47,10 @@ export class EmployeeService{
         }
 
         return this.http.post<Employee>(this.baseUrl, formData)
+    }
+
+    removeEmployee(id : string) : Observable<GeneralResponse<null>>{
+        return this.http.delete<GeneralResponse<null>>(`${this.baseUrl}/${id}`);
     }
 
 }

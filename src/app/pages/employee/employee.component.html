@@ -35,6 +35,7 @@
           <th class="text-left px-4 py-2 border-b border-gray-200">Telefon</th>
           <th class="text-left px-4 py-2 border-b border-gray-200">Departman</th>
           <th class="text-left px-4 py-2 border-b border-gray-200">Ünvan</th>
+          <th class="text-left px-4 py-2 border-b border-gray-200">Seçenekler</th>
         </tr>
       </thead>
       <tbody>
@@ -43,9 +44,9 @@
 
           <td class="px-4 py-6 border-b border-gray-200 flex items-center gap-3">
             <img
-              [src]="employee.ImageUri"
+              [src]="'data:image/jpeg;base64,' + employee.ImageUri"
               alt="Profil Fotoğrafı"
-              class="w-10 h-10 rounded-full object-cover border border-gray-200"
+              class="w-15 h-15 rounded-full object-cover border border-gray-200"
             />
           </td>
 
@@ -55,6 +56,13 @@
           <td class="px-4 py-6 border-b border-gray-200">{{ employee.PhoneNumber }}</td>
           <td class="px-4 py-6 border-b border-gray-200">{{ employee.Department }}</td>
           <td class="px-4 py-6 border-b border-gray-200">{{ employee.Title }}</td>
+          <td class="px-4 py-6 border-b border-gray-200"><button type="button" (click)="removeEmployee(employee.Id)" class="z-10 relative bg-transparent hover:text-red-500 transition"><i class="pi pi-trash"></i></button></td>
+
+
+          
+
+
+
         </tr>
         <tr *ngIf="filteredEmployees().length === 0">
           <td colspan="4" class="text-center py-4 text-gray-400">Çalışan bulunamadı.</td>
