@@ -26,6 +26,7 @@ export class EmployeeComponent {
   searchText: string = '';
   employees: Employee[] = [];
   visible: boolean = false;
+  selectedEmployee?: Employee;
 
   constructor(private employeeService: EmployeeService) {}
 
@@ -41,6 +42,7 @@ export class EmployeeComponent {
   }
 
   showDialog() {
+    this.selectedEmployee = undefined;
     this.visible = true;
   }
 
@@ -49,6 +51,7 @@ export class EmployeeComponent {
   this.employeeService.getAllEmployees().subscribe({
     next: (data: any) => {
       this.employees = data.Result;
+      alert("Çalışanlar listesi başarıyla yüklendi.");
     },
     error: (err) => console.error('Hata:', err),
   });
@@ -58,8 +61,15 @@ export class EmployeeComponent {
   removeEmployee(id: string) {
     this.employeeService.removeEmployee(id).subscribe({
       next: (data: any) => {
+        this.loadEmployees();
         alert(data.Message);
       },
     });
+  }
+
+  updateEmployee(employee: Employee) {
+
+  this.selectedEmployee = { ...employee };
+    this.visible = true;
   }
 }

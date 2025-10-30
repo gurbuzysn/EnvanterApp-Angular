@@ -40,14 +40,22 @@
       </thead>
       <tbody>
         <tr *ngFor="let employee of filteredEmployees()" class="hover:bg-blue-50 transition">
-
-
           <td class="px-4 py-6 border-b border-gray-200 flex items-center gap-3">
-            <img
-              [src]="'data:image/jpeg;base64,' + employee.ImageUri"
-              alt="Profil Fotoğrafı"
-              class="w-15 h-15 rounded-full object-cover border border-gray-200"
-            />
+            <ng-container *ngIf="employee.ProfileImage; else defaultAvatar">
+              <img
+                [src]="'data:image/jpeg;base64,' + employee.ProfileImage"
+                alt="Profil Fotoğrafı"
+                class="w-15 h-15 rounded-full object-cover border border-gray-200 shadow-sm"
+              />
+            </ng-container>
+
+            <ng-template #defaultAvatar>
+              <div
+                class="w-15 h-15 flex items-center justify-center rounded-full bg-gray-100 border border-gray-300 shadow-sm"
+              >
+                <i class="pi pi-user text-gray-400 text-2xl"></i>
+              </div>
+            </ng-template>
           </td>
 
           <td class="px-4 py-6 border-b border-gray-200">{{ employee.FirstName }}</td>
@@ -56,13 +64,22 @@
           <td class="px-4 py-6 border-b border-gray-200">{{ employee.PhoneNumber }}</td>
           <td class="px-4 py-6 border-b border-gray-200">{{ employee.Department }}</td>
           <td class="px-4 py-6 border-b border-gray-200">{{ employee.Title }}</td>
-          <td class="px-4 py-6 border-b border-gray-200"><button type="button" (click)="removeEmployee(employee.Id)" class="z-10 relative bg-transparent hover:text-red-500 transition"><i class="pi pi-trash"></i></button></td>
-
-
-          
-
-
-
+          <td class="px-4 py-6 border-b border-gray-200 gap-4 flex justify-center">
+            <button
+              type="button"
+              (click)="updateEmployee(employee)"
+              class="z-10 relative bg-transparent hover:text-green-500 transition"
+            >
+              <i class="pi pi-pencil"></i>
+            </button>
+            <button
+              type="button"
+              (click)="removeEmployee(employee.Id)"
+              class="z-10 relative bg-transparent hover:text-red-500 transition"
+            >
+              <i class="pi pi-trash"></i>
+            </button>
+          </td>
         </tr>
         <tr *ngIf="filteredEmployees().length === 0">
           <td colspan="4" class="text-center py-4 text-gray-400">Çalışan bulunamadı.</td>
@@ -71,3 +88,9 @@
     </table>
   </div>
 </div>
+
+<app-add-employee-modal
+  [(visible)]="visible"
+  [employeeToEdit]="selectedEmployee"
+  (employeeSaved)="loadEmployees()"
+></app-add-employee-modal>

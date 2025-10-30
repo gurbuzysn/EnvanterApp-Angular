@@ -11,7 +11,7 @@ export interface Employee{
     PhoneNumber: string,
     Department: string,
     Title: string,
-    ImageUri?: string
+    ProfileImage?: string
 }
 
 export interface GeneralResponse<T>{
@@ -42,8 +42,8 @@ export class EmployeeService{
         formData.append('PhoneNumber', employee.PhoneNumber);
         formData.append('Department', employee.Department);
         formData.append('Title', employee.Title);
-        if (employee.ImageUri) {
-            formData.append('ImageUri', employee.ImageUri);
+        if (employee.ProfileImage) {
+            formData.append('ProfileImage', employee.ProfileImage);
         }
 
         return this.http.post<Employee>(this.baseUrl, formData)
@@ -51,6 +51,21 @@ export class EmployeeService{
 
     removeEmployee(id : string) : Observable<GeneralResponse<null>>{
         return this.http.delete<GeneralResponse<null>>(`${this.baseUrl}/${id}`);
+    }
+
+    updateEmployee(id: string, employee: Employee) {
+        const formData = new FormData();
+        formData.append('FirstName', employee.FirstName);
+        formData.append('LastName', employee.LastName);
+        formData.append('Email', employee.Email);
+        formData.append('PhoneNumber', employee.PhoneNumber);
+        formData.append('Department', employee.Department);
+        formData.append('Title', employee.Title);
+        if (employee.ProfileImage) {
+            formData.append('ProfileImage', employee.ProfileImage);
+        }
+
+        return this.http.put<Employee>(`${this.baseUrl}/${id}`, formData);
     }
 
 }

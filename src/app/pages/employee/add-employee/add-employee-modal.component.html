@@ -1,5 +1,5 @@
 <p-dialog
-  header="Çalışan Ekle"
+  [header]="employeeToEdit ? 'Personeli Güncelle' : 'Yeni Personel Ekle'"
   [modal]="true"
   [(visible)]="visible"
   (onHide)="onHide()"

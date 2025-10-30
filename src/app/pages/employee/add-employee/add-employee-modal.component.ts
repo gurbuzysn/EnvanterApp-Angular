@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { DialogModule } from 'primeng/dialog';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
@@ -20,9 +20,12 @@ import { Employee, EmployeeService } from '../../../services/employee.service';
   ],
   templateUrl: './add-employee-modal.component.html',
 })
-export class AddEmployeeModalComponent {
+export class AddEmployeeModalComponent implements OnChanges {
   @Input() visible: boolean = false;
   @Output() visibleChange = new EventEmitter<boolean>();
+
+  @Input() employeeToEdit?: Employee;
+  @Output() employeeSaved = new EventEmitter<void>();
 
   previewUrl: string | ArrayBuffer | null = null;
   exampleForm: any;
@@ -40,6 +43,18 @@ export class AddEmployeeModalComponent {
     });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['employeeToEdit'] && this.employeeToEdit) {
+      this.form.patchValue(this.employeeToEdit);
+      this.previewUrl = this.employeeToEdit.ProfileImage
+        ? 'data:image/jpeg;base64,' + this.employeeToEdit.ProfileImage
+        : null;
+    } else if (!this.employeeToEdit) {
+      this.form.reset();
+      this.previewUrl = null;
+    }
+  }
+
   onSubmit() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -48,16 +63,35 @@ export class AddEmployeeModalComponent {
     }
 
     const employee: Employee = this.form.value;
-
-    this.employeeService.addEmployee(employee).subscribe({
-      next: (res) => {},
-      error: (err) => {},
-    });
+    if (this.employeeToEdit) {
+      // 🔹 GÜNCELLEME
+      this.employeeService.updateEmployee(this.employeeToEdit.Id, employee).subscribe({
+        next: (res) => {
+          alert('Çalışan başarıyla güncellendi');
+          this.employeeSaved.emit();
+          this.onHide();
+        },
+        error: (err) => console.error(err),
+      });
+    } else {
+      // 🔹 EKLEME
+      this.employeeService.addEmployee(employee).subscribe({
+        next: (res) => {
+          alert('Çalışan başarıyla eklendi');
+          this.employeeSaved.emit();
+          this.onHide();
+        },
+        error: (err) => console.error(err),
+      });
+    }
   }
 
   onHide() {
     this.visible = false;
     this.visibleChange.emit(this.visible);
+    this.employeeToEdit = undefined;
+    this.form.reset();
+    this.previewUrl = null;
   }
 
   onFileSelected(file: File) {
