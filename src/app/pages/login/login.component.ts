@@ -10,7 +10,6 @@ import { Router } from "@angular/router";
     standalone: true,
     imports: [FormsModule, InputTextModule, ButtonModule],
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css'],
 })
 export class LoginComponent{
     userName : string = "";

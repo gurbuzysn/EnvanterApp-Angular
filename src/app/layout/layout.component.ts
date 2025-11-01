@@ -9,5 +9,8 @@ import { RouterLink, RouterOutlet, RouterLinkActive } from "@angular/router";
 })
 
 export class LayoutComponent{
+    personelSettings(){
+        alert("Personel Ayarları");
+    }
 
 }

@@ -51,7 +51,6 @@ export class EmployeeComponent {
   this.employeeService.getAllEmployees().subscribe({
     next: (data: any) => {
       this.employees = data.Result;
-      alert("Çalışanlar listesi başarıyla yüklendi.");
     },
     error: (err) => console.error('Hata:', err),
   });

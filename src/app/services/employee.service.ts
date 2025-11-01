@@ -11,7 +11,7 @@ export interface Employee{
     PhoneNumber: string,
     Department: string,
     Title: string,
-    ProfileImage?: string
+    ProfileImage?: File
 }
 
 export interface GeneralResponse<T>{
