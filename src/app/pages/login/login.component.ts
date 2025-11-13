@@ -25,11 +25,8 @@ export class LoginComponent{
 
         this.authService.login(data).subscribe({
             next: (res : any) => {
-
                 localStorage.setItem('token', res.token);
-
                 this.router.navigate(['/dashboard']);
-                
             },
             error: (err) => {
                     alert('Giriş hatası: ' + err);
