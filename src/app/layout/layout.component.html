@@ -1,18 +1,54 @@
 <div class="flex flex-col min-h-screen bg-gray-100">
-
   <header class="bg-blue-500 shadow px-6 py-2 flex justify-between items-center">
     <h1 class="text-2xl font-semibold text-white">EnvanterApp</h1>
 
-    <ng-container>
-      <div class="w-12 h-12 rounded-full bg-amber-400 flex justify-center items-center text-white text-2xl shadow-md hover:bg-blue-400"
-      (click)="personelSettings()"
+
+    <ng-container *ngIf="this.user?.ImageUri; else noImg">
+      <img
+        id="dropDownButton"
+        (click)="toggleDropDown()"
+        [src]="'data:image/*;base64,' + user.ImageUri"
+        class="w-12 h-12 rounded-full object-cover cursor-pointer shadow-md hover:opacity-90"
+        
+      />
+    </ng-container>
+
+
+    <ng-template #noImg>
+      <div
+      (click)="toggleDropDown()"
+        class="w-12 h-12 rounded-full bg-amber-400 flex justify-center items-center text-white text-2xl shadow-md hover:bg-blue-400"
       >
         <i class="pi pi-user"></i>
       </div>
-    </ng-container>
-      
-                                                  
+    </ng-template>
+
+<div
+    *ngIf="isDropdownOpen"
+    class="absolute right-6 top-16 w-48 bg-white rounded-xl shadow-lg border z-50"
+  >
+    <ul class="flex flex-col py-2">
+      <li
+        class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+        (click)="goProfile()"
+      >
+        Profilim
+      </li>
+      <li
+        class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-600"
+        (click)="logout()"
+      >
+        Çıkış Yap
+      </li>
+    </ul>
+  </div>
+
   </header>
+
+
+
+
+
 
   <div class="flex flex-1">
     <aside class="w-64 bg-white text-gray-700 border-r border-gray-200 flex flex-col">
@@ -55,5 +91,4 @@
       <router-outlet></router-outlet>
     </main>
   </div>
-
 </div>
