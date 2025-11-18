@@ -1,7 +1,7 @@
-<div class="mx-10 my-5">
-  <h1 class="text-3xl text-gray-500">Personel İşlemleri</h1>
+<div class="mx-30 my-5 bg-slate-100">
+  <h1 class="text-xl text-gray-500">Personel İşlemleri</h1>
 
-  <div class="bg-white mt-10 flex justify-between p-10 rounded-xl">
+  <div class="bg-white mt-10 flex justify-between p-5 px-10 rounded-xl">
     <p-iconfield>
       <input
         type="text"
@@ -28,9 +28,9 @@
     <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
       <thead>
         <tr class="">
-          <th class="text-left px-4 py-2 border-b border-gray-200"></th>
           <th class="text-left px-4 py-2 border-b border-gray-200">İsim</th>
           <th class="text-left px-4 py-2 border-b border-gray-200">Soyisim</th>
+          <th class="text-left px-4 py-2 border-b border-gray-200"></th>
           <th class="text-left px-4 py-2 border-b border-gray-200">Email</th>
           <th class="text-left px-4 py-2 border-b border-gray-200">Telefon</th>
           <th class="text-left px-4 py-2 border-b border-gray-200">Departman</th>
@@ -40,31 +40,31 @@
       </thead>
       <tbody>
         <tr *ngFor="let employee of filteredEmployees()" class="hover:bg-blue-50 transition">
-          <td class="px-4 py-6 border-b border-gray-200 flex items-center gap-3">
+          <td class="px-4 py-2 border-b border-gray-200 flex items-center gap-3">
             <ng-container *ngIf="employee.ProfileImage; else defaultAvatar">
               <img
                 [src]="'data:image/jpeg;base64,' + employee.ProfileImage"
                 alt="Profil Fotoğrafı"
-                class="w-15 h-15 rounded-full object-cover border border-gray-200 shadow-sm"
+                class="w-10 h-10 rounded-full object-cover border border-gray-200 shadow-sm"
               />
             </ng-container>
 
             <ng-template #defaultAvatar>
               <div
-                class="w-15 h-15 flex items-center justify-center rounded-full bg-gray-100 border border-gray-300 shadow-sm"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 border border-gray-300 shadow-sm"
               >
                 <i class="pi pi-user text-gray-400 text-2xl"></i>
               </div>
             </ng-template>
           </td>
 
-          <td class="px-4 py-6 border-b border-gray-200">{{ employee.FirstName }}</td>
-          <td class="px-4 py-6 border-b border-gray-200">{{ employee.LastName }}</td>
-          <td class="px-4 py-6 border-b border-gray-200">{{ employee.Email }}</td>
-          <td class="px-4 py-6 border-b border-gray-200">{{ employee.PhoneNumber }}</td>
-          <td class="px-4 py-6 border-b border-gray-200">{{ employee.Department }}</td>
-          <td class="px-4 py-6 border-b border-gray-200">{{ employee.Title }}</td>
-          <td class="px-4 py-6 border-b border-gray-200 gap-4 flex justify-center">
+          <td class="px-4 py-2 border-b border-gray-200">{{ employee.FirstName }}</td>
+          <td class="px-4 py-2 border-b border-gray-200">{{ employee.LastName }}</td>
+          <td class="px-4 py-2 border-b border-gray-200">{{ employee.Email }}</td>
+          <td class="px-4 py-2 border-b border-gray-200">{{ employee.PhoneNumber }}</td>
+          <td class="px-4 py-2 border-b border-gray-200">{{ employee.Department }}</td>
+          <td class="px-4 py-2 border-b border-gray-200">{{ employee.Title }}</td>
+          <td class="px-4 py-2 border-b border-gray-200 gap-4 flex justify-center">
             <button
               type="button"
               (click)="updateEmployee(employee)"
