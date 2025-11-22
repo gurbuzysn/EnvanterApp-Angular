@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class LayoutComponent implements OnInit {
   user: any = null;
   isDropdownOpen = false;
+  isInventoryOpen = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -31,4 +32,9 @@ export class LayoutComponent implements OnInit {
   logout() {
     this.router.navigate(['/login']);
   }
+
+  toggleInventoryMenu(){
+    this.isInventoryOpen = !this.isInventoryOpen;
+  }
+
 }
