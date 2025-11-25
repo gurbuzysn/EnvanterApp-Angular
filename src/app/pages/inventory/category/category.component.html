@@ -1,3 +1,44 @@
 <div class="mx-30 my-5 bg-slate-100">
   <h1 class="text-xl text-gray-500">Kategori İşlemleri</h1>
+
+
+
+ <div class="bg-white mt-10 flex justify-between p-5 px-10 rounded-xl">
+    <p-iconfield>
+      <input
+        type="text"
+        pInputText
+        placeholder="Kategori Ara"
+        class="border border-gray-300 rounded-lg p-3 text-gray-500"
+      />
+      <p-inputicon class="pi pi-search" />
+    </p-iconfield>
+
+    <button
+      type="button"
+      class="text-white bg-green-500 hover:bg-green-600 rounded-full px-8 py-1.5 shadow-2xl"
+      type="button"
+      (click)="openAddCategoryModal()"
+    >
+      Kategori Ekle
+      <i class="pi pi-plus"></i>
+    </button>
+  </div>
+
+
+
+
+
+
+
+
 </div>
+
+<app-add-category-modal
+  [(visible)]="isAddCategoryModalVisible"
+>
+
+</app-add-category-modal>
+
+
+
