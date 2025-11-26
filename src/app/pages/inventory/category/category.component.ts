@@ -11,13 +11,9 @@ import { AddCategoryModalComponent } from "./add-category/add-category.component
 })
 
 export class CategoryComponent{
-
     isAddCategoryModalVisible: boolean = false;
-
-
 
     openAddCategoryModal(){
         this.isAddCategoryModalVisible = true;
-        alert("Add Category Modal Opened");
     }
 }

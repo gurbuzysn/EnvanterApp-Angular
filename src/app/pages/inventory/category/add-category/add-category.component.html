@@ -1,7 +1,47 @@
-<p-dialog 
-    header="Yeni Kategori Ekle" 
-    [modal]="true" 
-    [(visible)]="visible"
-> 
-Burada Ekleme Formu Olacak
+<p-dialog
+  header="Yeni Kategori Ekle"
+  [modal]="true"
+  [(visible)]="visible"
+  (onHide)="visibleChange.emit(false)"
+  [breakpoints]="{ '1199px': '40vw', '575px': '90vw' }"
+  [style]="{ width: '30vw' }"
+  class="p-fluid"
+>
+  <div class="flex flex-col gap-5">
+    <div>
+      <label class="font-medium text-gray-600 mb-2 inline-block">Kategori Fotoğrafı</label>
+
+      <p-fileUpload
+        name="categoryImage"
+        mode="basic"
+        chooseLabel="Fotoğraf Seç"
+        accept="image/*"
+        class="w-full bg-gray-50 border border-gray-300 rounded-xl"
+        (onSelect)="onImageSelect($event)"
+      ></p-fileUpload>
+    </div>
+
+    <div>
+      <label class="font-medium text-gray-600 mb-2 inline-block">Kategori Adı</label>
+      <input
+        type="text"
+        pInputText
+        [(ngModel)]="categoryName"
+        placeholder="Örn: Elektronik"
+        class="p-inputtext w-full border border-gray-300 rounded-xl px-3 py-2 shadow-sm focus:ring-2 focus:ring-green-400"
+      />
+    </div>
+
+    <div class="flex justify-end gap-3 mt-3">
+      <button
+        pButton
+        type="button"
+        class="p-button-outlined p-button-danger"
+        (click)="visibleChange.emit(false)"
+        label="İptal"
+      ></button>
+
+      <button pButton type="button" class="p-button-success" label="Kaydet" (click)="addCategory()"></button>
+    </div>
+  </div>
 </p-dialog>
