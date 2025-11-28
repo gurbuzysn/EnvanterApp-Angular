@@ -29,7 +29,7 @@ export interface GeneralResponse<T>{
 })
 
 export class EmployeeService{
-    baseUrl = `${environment.apiUrl}/Employee`
+    private baseUrl = `${environment.apiUrl}/Employee`
     constructor(private http: HttpClient){}
 
     getAllEmployees() : Observable<Employee[]>{ return this.http.get<Employee[]>(this.baseUrl) }
