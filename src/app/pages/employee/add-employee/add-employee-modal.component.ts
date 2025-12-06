@@ -6,6 +6,8 @@ import { ButtonModule } from 'primeng/button';
 import { FileUploadModule } from 'primeng/fileupload';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Employee, EmployeeService } from '../../../services/employee.service';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-add-employee-modal',
@@ -17,6 +19,7 @@ import { Employee, EmployeeService } from '../../../services/employee.service';
     ButtonModule,
     FileUploadModule,
     ReactiveFormsModule,
+    ToastModule,
   ],
   templateUrl: './add-employee-modal.component.html',
 })
@@ -31,7 +34,11 @@ export class AddEmployeeModalComponent implements OnChanges {
   exampleForm: any;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private employeeService: EmployeeService) {
+  constructor(
+    private fb: FormBuilder,
+    private employeeService: EmployeeService,
+    private messageService: MessageService
+  ) {
     this.form = this.fb.group({
       FirstName: [null],
       LastName: [null],
@@ -58,30 +65,62 @@ export class AddEmployeeModalComponent implements OnChanges {
   onSubmit() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      alert('Form geçersiz');
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Form Hatası',
+        detail: 'Form geçersiz',
+      });
       return;
     }
 
     const employee: Employee = this.form.value;
     if (this.employeeToEdit) {
-      // 🔹 GÜNCELLEME
       this.employeeService.updateEmployee(this.employeeToEdit.Id, employee).subscribe({
         next: (res) => {
-          alert('Çalışan başarıyla güncellendi');
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Başarılı',
+            detail: 'Çalışan başarıyla güncellendi',
+          });
           this.employeeSaved.emit();
           this.onHide();
         },
-        error: (err) => console.error(err),
+        error: (err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Hata',
+            detail: 'Çalışan güncellenirken bir hata oluştu',
+          });
+        },
       });
     } else {
-      // 🔹 EKLEME
       this.employeeService.addEmployee(employee).subscribe({
         next: (res) => {
-          alert('Çalışan başarıyla eklendi');
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Başarılı',
+            detail: 'Çalışan başarıyla eklendi',
+          });
           this.employeeSaved.emit();
           this.onHide();
         },
-        error: (err) => console.error(err),
+        error: (err) => {
+          let errorMessage = 'Bir hata oluştu.';
+
+          if (err.error && err.error.errors) {
+            errorMessage = Object.values(err.error.errors)
+              .map((messages: any) => messages.join(', '))
+              .join(' | ');
+          } else if (err.error && err.error.message) {
+            errorMessage = err.error.message;
+          }
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Hata',
+            detail: errorMessage,
+          });
+          console.error('Detaylı Hata:', err);
+        },
       });
     }
   }

@@ -36,7 +36,4 @@ export class AuthService{
         localStorage.removeItem('token');
         this.currentUser.next(null);
     }
-
-
-
 }

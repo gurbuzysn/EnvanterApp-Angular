@@ -8,63 +8,44 @@
   [maximizable]="true"
 >
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
-
-
     <div class="flex d-flex justify-around mb-5">
-
-
-        <div class="relative w-17 h-17 mb-3"> 
-          
-          <img
-                *ngIf="previewUrl; else defaultAvatar"
-                [src]="previewUrl"
-                alt="Employee Avatar"
-                class="w-full h-full rounded-full object-cover border border-gray-300 shadow-lg"
-            />
-
-            <ng-template #defaultAvatar>
-                <div
-                    class="w-full h-full flex items-center justify-center rounded-full bg-gray-100 border border-gray-300 shadow-lg"
-                >
-                    <i class="pi pi-user text-gray-500 text-4xl"></i>
-                </div>
-            </ng-template>
-
-        </div>
-
-            <p-fileUpload
-                mode="basic"
-                name="avatar"
-                chooseLabel="Fotoğraf Seç"
-                (onSelect)="onFileSelected($event.files[0])"
-                [auto]="false"
-                class="p-button-rounded p-button-info"
-            >
-            </p-fileUpload>
-
+      <div class="relative w-17 h-17 mb-3">
+        <img
+          *ngIf="previewUrl; else defaultAvatar"
+          [src]="previewUrl"
+          alt="Employee Avatar"
+          class="w-full h-full rounded-full object-cover border border-gray-300 shadow-lg"
+        />
+        <ng-template #defaultAvatar>
+          <div
+            class="w-full h-full flex items-center justify-center rounded-full bg-gray-100 border border-gray-300 shadow-lg"
+          >
+            <i class="pi pi-user text-gray-500 text-4xl"></i>
+          </div>
+        </ng-template>
+      </div>
+      <p-fileUpload
+        mode="basic"
+        name="avatar"
+        chooseLabel="Fotoğraf Seç"
+        (onSelect)="onFileSelected($event.files[0])"
+        [auto]="false"
+        class="p-button-rounded p-button-info"
+      >
+      </p-fileUpload>
     </div>
-
-
-
-
-
-
     <div class="flex d-flex justify-around mb-5">
       <input type="text" pInputText formControlName="FirstName" placeholder="İsim" />
       <input type="text" pInputText formControlName="LastName" placeholder="Soyisim" />
     </div>
-
     <div class="flex d-flex justify-around mb-5">
       <input type="text" pInputText formControlName="Email" placeholder="E-Mail" />
       <input type="text" pInputText formControlName="PhoneNumber" placeholder="Telefon" />
     </div>
-
     <div class="flex d-flex justify-around">
       <input type="text" pInputText formControlName="Department" placeholder="Departman" />
       <input type="text" pInputText formControlName="Title" placeholder="Ünvan" />
     </div>
-
     <div class="flex justify-center gap-5 mt-5">
       <button
         pButton
@@ -86,3 +67,5 @@
     </div>
   </form>
 </p-dialog>
+
+

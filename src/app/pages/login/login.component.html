@@ -1,3 +1,5 @@
+<p-toast></p-toast>
+
 <div class="grid grid-cols-10 h-screen">
   <div class="col-span-6 bg-blue-100 flex justify-center items-center">
     <img src="assets/login2.svg" alt="" class="w-3/4 h-3/4 object-cover" />
@@ -9,8 +11,6 @@
       (ngSubmit)="login()"
       class="flex flex-col gap-6 w-3/4 bg-white p-10 rounded-2xl shadow-lg"
     >
-
-      <!-- Kullanıcı Adı -->
       <div>
         <label for="userName" class="block mb-2 text-gray-700">Kullanıcı Adı</label>
         <input
@@ -21,13 +21,8 @@
           placeholder="Kullanıcı Adı"
           class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
         />
-        <!-- <small class="text-red-500" *ngIf="f.userName.touched && f.userName.invalid">
-          <ng-container *ngIf="f.userName.errors?.['required']">Kullanıcı adı zorunludur.</ng-container>
-          <ng-container *ngIf="f.userName.errors?.['minlength']">En az 3 karakter olmalı.</ng-container>
-        </small> -->
+      
       </div>
-
-      <!-- Şifre -->
       <div>
         <label for="password" class="block mb-2 text-gray-700">Şifre</label>
         <input
@@ -38,84 +33,14 @@
           placeholder="Şifre"
           class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-sky-400"
         />
-        <!-- <small class="text-red-500" *ngIf="f.password.touched && f.password.invalid">
-          <ng-container *ngIf="f.password.errors?.['required']">Şifre zorunludur.</ng-container>
-          <ng-container *ngIf="f.password.errors?.['minlength']">En az 5 karakter olmalı.</ng-container>
-        </small> -->
       </div>
-
-      <!-- Buton -->
       <button
         pButton
         type="submit"
         label="Giriş Yap"
         class="w-full !bg-blue-400 hover:!bg-sky-600 text-white border-none rounded-lg shadow-md p-2"
       >
-       
     </button>
     </form>
   </div>
 </div>
-
-
-
-
-
-<!-- <div class="grid grid-cols-10 h-screen">
-  <div class="col-span-6 h-screen bg-sky-100 flex justify-center items-center">
-    <img src="assets/login2.svg" alt="" class="w-full h-full object-cover" />
-  </div>
-
-  <div class="col-span-4 flex items-center justify-center bg-white">
-    <form [formGroup]="loginForm" (ngSubmit)="login()" class="flex flex-col gap-6 w-3/4 bg-white p-10 rounded-2xl shadow-lg">
-      <div>
-        <label for="userName" class="block m-2">Kullanıcı Adı</label>
-        <input
-          id="userName"
-          type="text"
-          name="userName"
-          formControlName="userName"
-          pInputText
-          placeholder="Kullanıcı Adı"
-          class="w-full"
-        />
-        <small class="text-red-500" *ngIf="f.userName.touched && f.userName.invalid">
-          <ng-container *ngIf="f.userName.errors?.['required']"
-            >Kullanıcı adı zorunludur.</ng-container
-          >
-          <ng-container *ngIf="f.userName.errors?.['minlength']"
-            >En az 3 karakter olmalı.</ng-container
-          >
-        </small>
-      </div>
-
-      <div>
-        <label for="password" class="block m-2">Şifre</label>
-        <input
-          id="password"
-          type="password"
-          name="password"
-          formControlName="password"
-          pInputText
-          placeholder="Şifre"
-          class="w-full"
-        />
-        <small p-error class="text-red-500" *ngIf="f.password.touched && f.password.invalid">
-          <ng-container *ngIf="f.password.errors?.['required']">Şifre zorunludur.</ng-container>
-          <ng-container *ngIf="f.password.errors?.['minlength']"
-            >En az 5 karakter olmalı.</ng-container
-          >
-        </small>
-      </div>
-
-      <div>
-        <button
-          pButton
-          type="submit"
-          label="Giriş Yap"
-          class="w-full !bg-sky-400 hover:!bg-sky-600 text-white border-none rounded-lg shadow-md"
-        ></button>
-      </div>
-    </form>
-  </div>
-</div> -->
