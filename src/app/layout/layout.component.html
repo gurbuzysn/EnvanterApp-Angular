@@ -2,11 +2,11 @@
   <header class="bg-blue-500 shadow px-6 py-2 flex justify-between items-center">
     <h1 class="text-2xl font-semibold text-white">EnvanterApp</h1>
 
-    <ng-container *ngIf="this.user?.ImageUri; else noImg">
+    <ng-container *ngIf="user()?.imageUri; else noImg">
       <img
         id="dropDownButton"
         (click)="toggleDropDown()"
-        [src]="'data:image/*;base64,' + user.ImageUri"
+        [src]="'data:image/*;base64,' + user()?.imageUri"
         class="w-12 h-12 rounded-full object-cover cursor-pointer shadow-md hover:opacity-90"
       />
     </ng-container>
@@ -61,7 +61,6 @@
           <i class="pi" [ngClass]="isInventoryOpen ? 'pi-chevron-down' : 'pi-chevron-right'"></i>
         </div>
 
-        <!-- ALT MENÜ -->
         <div *ngIf="isInventoryOpen" class="ml-4 mt-1 space-y-1 border-l border-gray-300 pl-3">
           <a
             routerLink="/inventory/inventory"

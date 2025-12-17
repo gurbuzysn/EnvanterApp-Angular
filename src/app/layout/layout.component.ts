@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, computed, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
@@ -10,19 +10,15 @@ import { Router } from '@angular/router';
   imports: [RouterLink, RouterOutlet, RouterLinkActive, CommonModule],
   templateUrl: './layout.component.html',
 })
-export class LayoutComponent implements OnInit {
-  user: any = null;
+
+export class LayoutComponent {
   isDropdownOpen = false;
   isInventoryOpen = false;
 
+  user = computed(() => this.authService.currentUser());
+
   constructor(private authService: AuthService, private router: Router) {}
-
-  ngOnInit(): void {
-    this.authService.getUser().subscribe((u) => {
-      this.user = u;
-    });
-  }
-
+ 
   toggleDropDown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
@@ -30,6 +26,7 @@ export class LayoutComponent implements OnInit {
   goProfile() {}
 
   logout() {
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
 

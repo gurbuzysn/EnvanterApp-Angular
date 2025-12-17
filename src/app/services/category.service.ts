@@ -23,7 +23,7 @@ export class CategoryService {
     return this.http.get<any>(`${this.baseUrl}`);
   }
 
-  updateCategory(id: string, name: string, image: File | null) {
+  updateCategory(id: string, name: string, image: File | null): Observable<any> {
     const formData = new FormData();
     formData.append('Name', name);
     if (image) formData.append('Image', image);

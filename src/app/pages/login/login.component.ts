@@ -1,11 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  FormsModule,
-  FormBuilder,
-  FormGroup,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule} from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
@@ -19,6 +13,7 @@ import { ToastModule } from 'primeng/toast';
   imports: [ReactiveFormsModule, InputTextModule, ButtonModule, ToastModule],
   templateUrl: './login.component.html',
 })
+
 export class LoginComponent {
   loginForm: FormGroup;
 
@@ -36,7 +31,8 @@ export class LoginComponent {
 
   login() {
     if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
+        this.loginForm.markAllAsTouched();
+        return;
     }
 
     const data = this.loginForm.value;
@@ -49,18 +45,12 @@ export class LoginComponent {
       error: (error) => {
         let errorMessage = 'Bilinmeyen bir hata oluştu.';
         if (error.error) {
-          if (typeof error.error === 'string') {
-            errorMessage = error.error;
-          } else if (error.error.message) {
-            errorMessage = error.error.message;
-          }
-          else if(error.error.Message){
-            errorMessage = error.error.Message;
-          }
-          else if (error.error.errors) {
-            errorMessage = Object.values(error.error.errors).flat().join('\n');
-          }
-        } else if (error.message) {
+          if (typeof error.error === 'string') { errorMessage = error.error;}
+          else if (error.error.message) { errorMessage = error.error.message;}
+          else if (error.error.Message) { errorMessage = error.error.Message; }
+          else if (error.error.errors) { errorMessage = Object.values(error.error.errors).flat().join('\n'); }
+        } 
+        else if (error.message) {
           errorMessage = error.message;
         }
 

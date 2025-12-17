@@ -17,7 +17,6 @@ export const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'employee', component: EmployeeComponent },
-
       {
         path: 'inventory',
         children: [
@@ -25,7 +24,6 @@ export const routes: Routes = [
           { path: 'categories', component: CategoryComponent },
         ],
       },
-
       { path: 'assignment', component: AssignmentComponent },
     ],
   },

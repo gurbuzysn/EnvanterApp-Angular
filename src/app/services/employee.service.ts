@@ -24,6 +24,7 @@ export interface GeneralResponse<T> {
 @Injectable({
   providedIn: 'root',
 })
+
 export class EmployeeService {
   private baseUrl = `${environment.apiUrl}/Employee`;
   constructor(private http: HttpClient) {}
@@ -51,7 +52,7 @@ export class EmployeeService {
     return this.http.delete<GeneralResponse<null>>(`${this.baseUrl}/${id}`);
   }
 
-  updateEmployee(id: string, employee: Employee) {
+  updateEmployee(id: string, employee: Employee): Observable<Employee> {
     const formData = new FormData();
     formData.append('FirstName', employee.FirstName);
     formData.append('LastName', employee.LastName);
