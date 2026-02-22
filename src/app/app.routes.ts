@@ -1,32 +1,105 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
-import { LayoutComponent } from './layout/layout.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { EmployeeComponent } from './pages/employee/employee.component';
-import { InventoryComponent } from './pages/inventory/inventory.component';
-import { AssignmentComponent } from './pages/assignment/assignment.component';
-import { CategoryComponent } from './pages/inventory/category/category.component';
+import { BlankComponent } from './layouts/blank/blank.component';
+import { FullComponent } from './layouts/full/full.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-
   {
     path: '',
-    component: LayoutComponent,
+    component: FullComponent,
     children: [
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'employee', component: EmployeeComponent },
       {
-        path: 'inventory',
-        children: [
-          { path: 'inventory', component: InventoryComponent },
-          { path: 'categories', component: CategoryComponent },
-        ],
+        path: '',
+        redirectTo: '/dashboards/dashboard1',
+        pathMatch: 'full',
       },
-      { path: 'assignment', component: AssignmentComponent },
+      {
+        path: 'starter',
+        loadChildren: () =>
+          import('./pages/pages.routes').then((m) => m.PagesRoutes),
+      },
+      {
+        path: 'dashboards',
+        loadChildren: () =>
+          import('./pages/dashboards/dashboards.routes').then(
+            (m) => m.DashboardsRoutes
+          ),
+      },
+
+      {
+        path: 'forms',
+        loadChildren: () =>
+          import('./pages/forms/forms.routes').then((m) => m.FormsRoutes),
+      },
+      {
+        path: 'charts',
+        loadChildren: () =>
+          import('./pages/charts/charts.routes').then((m) => m.ChartsRoutes),
+      },
+      {
+        path: 'apps',
+        loadChildren: () =>
+          import('./pages/apps/apps.routes').then((m) => m.AppsRoutes),
+      },
+      {
+        path: 'widgets',
+        loadChildren: () =>
+          import('./pages/widgets/widgets.routes').then((m) => m.WidgetsRoutes),
+      },
+      {
+        path: 'tables',
+        loadChildren: () =>
+          import('./pages/tables/tables.routes').then((m) => m.TablesRoutes),
+      },
+      {
+        path: 'datatable',
+        loadChildren: () =>
+          import('./pages/datatable/datatable.routes').then(
+            (m) => m.DatatablesRoutes
+          ),
+      },
+      {
+        path: 'theme-pages',
+        loadChildren: () =>
+          import('./pages/theme-pages/theme-pages.routes').then(
+            (m) => m.ThemePagesRoutes
+          ),
+      },
+      {
+        path: 'ui-components',
+        loadChildren: () =>
+          import('./pages/ui-components/ui-components.routes').then(
+            (m) => m.UiComponentsRoutes
+          ),
+      },
     ],
   },
-
-  { path: '**', redirectTo: 'login' },
+  {
+    path: '',
+    component: BlankComponent,
+    children: [
+      {
+        path: 'authentication',
+        loadChildren: () =>
+          import('./pages/authentication/authentication.routes').then(
+            (m) => m.AuthenticationRoutes
+          ),
+      },
+      {
+        path: 'landingpage',
+        loadChildren: () =>
+          import('./pages/theme-pages/landingpage/landingpage.routes').then(
+            (m) => m.LandingPageRoutes
+          ),
+      },
+      {
+        path: 'front-pages',
+        loadChildren: () => import('./pages/front-pages/front-pages.routes').then(
+          (m) => m.FrontPagesRoutes)
+      },
+    ],
+  },
+  {
+    path: '**',
+    redirectTo: 'authentication/error',
+  },
 ];
