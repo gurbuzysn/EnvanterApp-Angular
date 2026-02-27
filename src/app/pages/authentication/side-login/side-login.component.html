@@ -73,8 +73,12 @@
               <a [routerLink]="['/authentication/side-forgot-pwd']"
                 class="text-primary font-semibold no-underline ms-auto text-sm">Forgot Password ?</a>
             </div>
-            <button mat-flat-button color="primary" class="w-full" [disabled]="!form.valid">
-              Sign In
+            <button mat-flat-button color="primary" class="w-full" [disabled]="!form.valid || isLoading" type="submit">
+              @if(isLoading) {
+                <span>Signing In...</span>
+              } @else {
+                <span>Sign In</span>
+              }
             </button>
             <!-- input -->
           </form>
