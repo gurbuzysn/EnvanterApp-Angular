@@ -38,11 +38,11 @@ export class AppSideLoginComponent {
   ) {}
 
   form = new FormGroup({
-    uname: new FormControl('admin', [
+    userName: new FormControl('admin@envanterapp.com', [
       Validators.required,
       Validators.minLength(5),
     ]),
-    password: new FormControl('12345', [Validators.required]),
+    password: new FormControl('123456', [Validators.required]),
   });
 
   get f() {
@@ -55,12 +55,13 @@ export class AppSideLoginComponent {
     }
 
     this.isLoading = true;
-    const username = this.form.get('uname')?.value || '';
+    const username = this.form.get('userName')?.value || '';
     const password = this.form.get('password')?.value || '';
 
     this.authService.login(username, password).subscribe({
       next: (response) => {
         this.isLoading = false;
+        console.log('Login response.isSuccess:', response.isSuccess);
         if (response.isSuccess) {
           this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
           // Store token if available
