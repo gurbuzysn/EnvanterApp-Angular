@@ -58,6 +58,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'employee',
+        loadChildren: () =>
+          import('./pages/employee/employee.route').then(
+            (m) => m.EmployeeRoutes
+          ),
+      },
+      {
         path: 'theme-pages',
         loadChildren: () =>
           import('./pages/theme-pages/theme-pages.routes').then(
