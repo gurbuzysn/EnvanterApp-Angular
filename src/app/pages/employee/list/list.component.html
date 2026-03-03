@@ -1,0 +1,144 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <div class="grid grid-cols-12 justify-between">
+      <div class="lg:col-span-6 col-span-12">
+        <mat-form-field appearance="outline" class="hide-hint w-full">
+          <div class="flex flex-row items-center self-stretch gap-3">
+            <i
+              class="iconify size-5.5!"
+              data-icon="solar:magnifer-line-duotone"
+            ></i>
+            <input
+              matInput
+              placeholder="Personel Ara"
+              [(ngModel)]="searchText"
+              (keyup)="applyFilter(searchText)"
+            />
+          </div>
+        </mat-form-field>
+      </div>
+      <div class="lg:col-span-6 col-span-12 flex items-center justify-end">
+        <button mat-flat-button color="primary">Personel Ekle</button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="cardWithShadow mb-0!">
+  <mat-card-content>
+    <div
+      class="relative overflow-auto"
+      [ngClass]="{ 'opacity-50 pointer-events-none': isLoading }"
+    >
+      <div *ngIf="isLoading" class="flex justify-center items-center py-8">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        class="min-w-full"
+        *ngIf="!isLoading"
+      >
+        <!-- ID Column -->
+        <ng-container matColumnDef="#">
+          <th mat-header-cell *matHeaderCellDef class="text-base font-semibold">
+            #
+          </th>
+          <td
+            mat-cell
+            *matCellDef="let element; let i = index"
+            class="whitespace-nowrap"
+          >
+            {{ i + 1 }}
+          </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef class="text-base font-semibold">
+            Ad Soyad
+          </th>
+          <td mat-cell *matCellDef="let element" class="whitespace-nowrap">
+            <div class="flex items-center">
+              <div class="ms-4">
+                <p class="font-semibold text-base mb-1 mt-0">
+                  {{ getFullName(element) }}
+                </p>
+                <small class="text-sm">{{ element.Title }}</small>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Email Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef class="text-base font-semibold">
+            E-posta
+          </th>
+          <td mat-cell *matCellDef="let element" class="whitespace-nowrap">
+            {{ element.Email }}
+          </td>
+        </ng-container>
+
+        <!-- Phone Column -->
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef class="text-base font-semibold">
+            Telefon
+          </th>
+          <td
+            mat-cell
+            *matCellDef="let element"
+            class="text-sm whitespace-nowrap"
+          >
+            {{ element.PhoneNumber }}
+          </td>
+        </ng-container>
+
+        <!-- Department Column -->
+        <ng-container matColumnDef="department">
+          <th mat-header-cell *matHeaderCellDef class="text-base font-semibold">
+            Departman
+          </th>
+          <td
+            mat-cell
+            *matCellDef="let element"
+            class="text-sm whitespace-nowrap"
+          >
+            {{ element.Department }}
+          </td>
+        </ng-container>
+
+        <!-- Title Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef class="text-base font-semibold">
+            Unvan
+          </th>
+          <td
+            mat-cell
+            *matCellDef="let element"
+            class="text-sm whitespace-nowrap"
+          >
+            {{ element.Title }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+
+      <div
+        *ngIf="dataSource.data.length === 0 && !isLoading"
+        class="py-8 text-center"
+      >
+        <p class="text-gray-500">Personel bulunamadı</p>
+      </div>
+
+      <mat-paginator
+        *ngIf="!isLoading"
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>

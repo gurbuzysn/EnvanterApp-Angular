@@ -4,6 +4,16 @@ export const navItems: NavItem[] = [
   {
     navCap: 'Home',
   },
+
+  
+  {
+    displayName: 'Personel İşlemleri',
+    iconName: 'users',
+    route: 'starter/employees/list',
+  },
+
+
+
   {
     displayName: 'General',
     iconName: 'chart-pie',
@@ -174,6 +184,7 @@ export const navItems: NavItem[] = [
     iconName: 'brand-ctemplar',
     route: 'apps/employee',
   },
+  
   {
     displayName: 'Notes',
     iconName: 'note',

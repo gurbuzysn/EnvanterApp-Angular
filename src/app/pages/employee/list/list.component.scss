@@ -1,0 +1,6 @@
+// Personel listesi sayfası stilleri
+.hide-hint ::ng-deep .mdc-text-field--filled {
+  .mat-mdc-form-field-hint {
+    display: none;
+  }
+}

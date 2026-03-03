@@ -24,7 +24,6 @@ export const routes: Routes = [
             (m) => m.DashboardsRoutes
           ),
       },
-
       {
         path: 'forms',
         loadChildren: () =>
